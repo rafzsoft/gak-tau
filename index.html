@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>WhatsApp Bot Activity Live</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { background:#f7f9fc; font-family:"Segoe UI",sans-serif; }
+    .activity-list { max-height:75vh; overflow:auto; }
+    .card { border-radius:12px; box-shadow:0 2px 5px rgba(0,0,0,.08); }
+    pre { background:#f1f3f5; border-radius:6px; padding:6px; }
+  </style>
+</head>
+<body>
+  <div class="container py-4">
+    <h1 class="mb-3 text-center">📊Gak tau jir cuma belajar</h1>
+
+    <div class="mb-3 d-flex gap-2">
+      <input id="filter" class="form-control" placeholder="Cari teks / nomor / tipe (Enter untuk filter)">
+      <button id="clear" class="btn btn-outline-secondary">Clear</button>
+    </div>
+
+    <div class="alert alert-info py-2 small mb-3">
+      Status: <span id="status">Mengambil data...</span>
+    </div>
+
+    <div id="list" class="activity-list"></div>
+  </div>
+
+  <script>
+  // ===== KONFIGURASI =====
+  const API_URL = "https://always-acap.dxyvxz.my.id/server/770ab1fc/api/events.json"; // ganti dengan endpoint milikmu
+  const REFRESH_MS = 4000; // refresh setiap 4 detik
+
+  const listEl = document.getElementById("list");
+  const statusEl = document.getElementById("status");
+  const filterInput = document.getElementById("filter");
+  const clearBtn = document.getElementById("clear");
+  let filter = "";
+  let events = [];
+
+  function escapeHtml(str){
+    if(!str)return"";
+    return String(str)
+      .replace(/&/g,"&amp;")
+      .replace(/</g,"&lt;")
+      .replace(/>/g,"&gt;")
+      .replace(/\"/g,"&quot;")
+      .replace(/'/g,"&#039;");
+  }
+
+  function render(){
+    const filtered=events.filter(e=>{
+      if(!filter)return true;
+      const f=filter.toLowerCase();
+      return e.type.toLowerCase().includes(f)
+        || (e.text||"").toLowerCase().includes(f)
+        || (e.from||"").toLowerCase().includes(f);
+    });
+    listEl.innerHTML=filtered.map(e=>`
+      <div class="card mb-2">
+        <div class="card-body py-2">
+          <div class="d-flex justify-content-between">
+            <div>
+              <strong>${escapeHtml(e.type)}</strong>
+              <span class="text-muted">— ${escapeHtml(e.from||'-')}</span>
+            </div>
+            <small class="text-muted">${new Date(e._ts||Date.now()).toLocaleTimeString()}</small>
+          </div>
+          ${e.text?`<div class="mt-2">${escapeHtml(e.text)}</div>`:''}
+          ${e.meta?`<pre class="mt-2 small">${escapeHtml(JSON.stringify(e.meta,null,2))}</pre>`:''}
+        </div>
+      </div>
+    `).join("")||`<div class="text-muted">Belum ada aktivitas.</div>`;
+  }
+
+  filterInput.addEventListener("keydown",e=>{
+    if(e.key==="Enter"){filter=filterInput.value.trim();render();}
+  });
+  clearBtn.addEventListener("click",()=>{filter="";filterInput.value="";render();});
+
+  // ===== AMBIL DATA DARI SERVER =====
+  async function fetchEvents(){
+    try{
+      const res=await fetch(API_URL);
+      if(!res.ok)throw new Error("HTTP "+res.status);
+      const json=await res.json();
+      if(!json.events)return;
+      events=json.events.sort((a,b)=>new Date(b._ts)-new Date(a._ts));
+      statusEl.textContent="Terhubung ✅ ("+events.length+" event)";
+      render();
+    }catch(err){
+      statusEl.textContent="Gagal memuat data ⚠️ "+err.message;
+    }
+  }
+
+  fetchEvents();
+  setInterval(fetchEvents,REFRESH_MS);
+  </script>
+</body>
+</html>
