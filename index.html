@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>sederhana tapi penuh makna😹</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+:root {
+  --gradient: linear-gradient(135deg, #00c6ff, #0072ff);
+  --glass: rgba(255, 255, 255, 0.08);
+  --blur: blur(12px);
+  --shadow: 0 0 25px rgba(0, 200, 255, 0.2);
+}
+
+body {
+  background: linear-gradient(-45deg, #5f2c82, #49a09d, #1e3c72, #2a5298);
+  background-size: 400% 400%;
+  animation: gradientBG 10s ease infinite;
+  font-family: "Poppins", sans-serif;
+  color: #f5f5f5;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+header {
+  background: var(--glass);
+  backdrop-filter: var(--blur);
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  padding: 15px;
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+header button {
+  background: transparent;
+  border: 2px solid transparent;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 10px 18px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+header button:hover, header button.active {
+  background: var(--gradient);
+  box-shadow: 0 0 15px rgba(0, 200, 255, 0.5);
+  border-color: rgba(255,255,255,0.2);
+}
+
+section {
+  display: none;
+  padding: 40px 25px;
+  animation: fadeIn 0.6s ease;
+}
+
+section.active { display: block; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+h1, h2 {
+  text-align: center;
+  background: linear-gradient(90deg, #00d2ff, #3a47d5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.store {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+  margin-top: 20px;
+}
+
+.item {
+  background: var(--glass);
+  backdrop-filter: var(--blur);
+  border-radius: 18px;
+  padding: 25px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top right, rgba(0,255,255,0.15), transparent 60%);
+  z-index: 0;
+}
+
+.item:hover { transform: translateY(-10px) scale(1.02); }
+.item h2 { color: #fff; margin-top: 0; }
+.item p { color: #ccc; }
+.price {
+  color: #00eaff;
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin: 12px 0;
+}
+
+button.buy {
+  background: var(--gradient);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+  position: relative;
+  z-index: 2;
+}
+
+button.buy:hover {
+  transform: scale(1.07);
+  box-shadow: 0 0 20px rgba(0, 200, 255, 0.5);
+}
+
+.profile {
+  text-align: center;
+  max-width: 600px;
+  margin: auto;
+}
+
+.profile img {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  border: 3px solid rgba(255,255,255,0.4);
+  box-shadow: 0 0 20px rgba(0,200,255,0.4);
+  transition: 0.3s;
+}
+
+.profile img:hover {
+  transform: scale(1.05);
+}
+
+.profile p { color: #ddd; }
+.profile a { color: #00eaff; text-decoration: none; }
+
+/* 🌐 Sosial Media Ikon */
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.social-links a {
+  font-size: 1.5rem;
+  color: white;
+  background: rgba(255,255,255,0.1);
+  padding: 12px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px rgba(0,200,255,0.3);
+}
+
+.social-links a:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 25px rgba(0,200,255,0.6);
+}
+
+/* Warna khas tiap platform */
+.social-links .whatsapp:hover { color: #25D366; }
+.social-links .instagram:hover { color: #E4405F; }
+.social-links .tiktok:hover { color: #69C9D0; }
+.social-links .youtube:hover { color: #FF0000; }
+.social-links .telegram:hover { color: #0088cc; }
+
+table {
+  width: 90%;
+  margin: 20px auto;
+  border-collapse: collapse;
+  background: var(--glass);
+  backdrop-filter: blur(8px);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+th, td {
+  padding: 14px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+th { background: rgba(255,255,255,0.1); color: #00eaff; }
+tr:hover { background: rgba(255,255,255,0.08); }
+
+footer {
+  text-align: center;
+  color: #fff;
+  padding: 20px;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+/* 🎵 BACKSOUND CONTROL GEPENG */
+.backsound-control {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--glass);
+  backdrop-filter: var(--blur);
+  padding: 10px 30px;
+  border-radius: 50px;
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 80%;
+  max-width: 600px;
+  justify-content: space-between;
+}
+
+.control-buttons {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.control-buttons i {
+  font-size: 1rem;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.control-buttons i:hover {
+  color: #00eaff;
+  transform: scale(1.2);
+}
+
+.progress-bar {
+  flex: 1;
+  height: 5px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--gradient);
+  transition: width 0.2s linear;
+}
+
+.backsound-control span {
+  font-size: 0.9rem;
+  color: #fff;
+  opacity: 0.8;
+  min-width: 90px;
+  text-align: right;
+}
+</style>
+</head>
+
+<body>
+<header>
+  <button class="active" onclick="showSection('home')">🏠 Home</button>
+  <button onclick="showSection('profile')">👤 Profil</button>
+  <button onclick="showSection('database')">📦 Database</button>
+</header>
+
+<section id="home" class="active">
+  <h1>🌐 Daftar Panel</h1>
+  <div class="store" id="store"></div>
+</section>
+
+<section id="profile">
+  <div class="profile">
+    <img src="https://files.catbox.moe/l0v41z.jpeg" alt="Profil">
+    <h2>Rafz</h2>
+    <p>Penyedia panel murah, cepat, dan terpercaya 💫</p>
+    <p>Hubungi kami via:</p>
+    <div class="social-links">
+      <a href="https://wa.me/6281549426361" target="_blank" class="whatsapp"><i class="fa-brands fa-whatsapp"></i></a>
+      <a href="https://instagram.com/" target="_blank" class="instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://www.tiktok.com/@xyraa_ao" target="_blank" class="tiktok"><i class="fa-brands fa-tiktok"></i></a>
+      <a href="https://youtube.com/@Xyraa2-q6o" target="_blank" class="youtube"><i class="fa-brands fa-youtube"></i></a>
+      <a href="https://t.me/" target="_blank" class="telegram"><i class="fa-brands fa-telegram"></i></a>
+    </div>
+  </div>
+</section>
+
+<section id="database">
+  <h2>📊 Data Pemesanan</h2>
+  <table id="dbTable">
+    <thead>
+      <tr><th>Nama</th><th>Paket</th><th>Tanggal</th></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</section>
+
+<!-- 🎵 BACKSOUND CONTROL GEPENG -->
+<div class="backsound-control">
+  <div class="control-buttons">
+    <i class="fa-solid fa-rotate-left" id="repeatBtn" title="Ulangi"></i>
+    <i class="fa-solid fa-backward" id="prevBtn" title="Sebelumnya"></i>
+    <i class="fa-solid fa-play" id="playBtn" title="Putar/Jeda"></i>
+    <i class="fa-solid fa-forward" id="nextBtn" title="Berikutnya"></i>
+    <i class="fa-solid fa-rotate-right" id="loopBtn" title="Ulang Otomatis"></i>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <span id="timeDisplay">00:00 / 00:00</span>
+</div>
+
+<audio id="backsound" loop>
+  <source src="https://files.catbox.moe/mjiwdq.mp3" type="audio/mpeg">
+</audio>
+
+<footer>© 2025 𝐑𝐚𝐟𝐳𝐒𝐭𝐨𝐫𝐞</footer>
+
+<script>
+const panels = [
+  { name: "5GB Panel", price: "Rp4.000", desc: "Untuk bot kecil & ringan" },
+  { name: "6GB Panel", price: "Rp5.000", desc: "Ideal untuk bot menengah" },
+  { name: "7GB Panel", price: "Rp6.000", desc: "Kinerja stabil & handal" },
+  { name: "8GB Panel", price: "Rp7.000", desc: "Cocok untuk developer aktif" },
+  { name: "9GB Panel", price: "Rp8.000", desc: "Performa tinggi & uptime maksimal" },
+  { name: "10GB Panel", price: "Rp9.000", desc: "Untuk proyek besar & tim" },
+  { name: "Unlimited Panel", price: "Rp10.000", desc: "Tanpa batas performa!" }
+];
+
+const store = document.getElementById('store');
+panels.forEach(p => {
+  const div = document.createElement('div');
+  div.className = 'item';
+  div.innerHTML = `
+    <h2>${p.name}</h2>
+    <p>${p.desc}</p>
+    <div class='price'>${p.price}</div>
+    <button class='buy' onclick="orderWhatsApp('${p.name}', '${p.price}')">Beli Sekarang</button>`;
+  store.appendChild(div);
+});
+
+function showSection(id) {
+  document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('header button').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+function orderWhatsApp(name, price) {
+  const buyer = prompt("Masukkan nama pembeli:");
+  if (!buyer) return alert("Nama tidak boleh kosong!");
+  const date = new Date().toLocaleDateString();
+  const pesan = `Halo kak, saya ingin memesan panel:\n\nPaket: ${name}\nHarga: ${price}\nNama: ${buyer}\nTanggal: ${date}\n\nMohon konfirmasi ketersediaannya ya kak`;
+  const nomor = "6281549426361";
+  const url = `https://wa.me/${nomor}?text=${encodeURIComponent(pesan)}`;
+  window.location.href = url;
+}
+
+// 🎵 BACKSOUND SYSTEM
+const audio = document.getElementById("backsound");
+const playBtn = document.getElementById("playBtn");
+const timeDisplay = document.getElementById("timeDisplay");
+const progressFill = document.getElementById("progressFill");
+const songs = [
+  "https://files.catbox.moe/c7naxw.mp3",
+  "https://files.catbox.moe/mjiwdq.mp3",
+  "https://files.catbox.moe/cvprdn.mp3"
+];
+let current = 0;
+let playing = false;
+
+function formatTime(seconds) {
+  const m = Math.floor(seconds / 60);
+  const s = Math.floor(seconds % 60);
+  return `${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
+}
+
+function updateDuration() {
+  const currentTime = formatTime(audio.currentTime);
+  const totalTime = isNaN(audio.duration) ? "00:00" : formatTime(audio.duration);
+  timeDisplay.textContent = `${currentTime} / ${totalTime}`;
+  progressFill.style.width = (audio.currentTime / audio.duration) * 100 + "%";
+}
+
+function togglePlay() {
+  if (playing) {
+    audio.pause();
+    playBtn.classList.replace("fa-pause", "fa-play");
+  } else {
+    audio.play();
+    playBtn.classList.replace("fa-play", "fa-pause");
+  }
+  playing = !playing;
+}
+
+function nextSong() {
+  current = (current + 1) % songs.length;
+  audio.src = songs[current];
+  audio.play();
+  playBtn.classList.replace("fa-play", "fa-pause");
+  playing = true;
+}
+
+function prevSong() {
+  current = (current - 1 + songs.length) % songs.length;
+  audio.src = songs[current];
+  audio.play();
+  playBtn.classList.replace("fa-play", "fa-pause");
+  playing = true;
+}
+
+playBtn.addEventListener("click", togglePlay);
+document.getElementById("nextBtn").addEventListener("click", nextSong);
+document.getElementById("prevBtn").addEventListener("click", prevSong);
+
+audio.addEventListener("timeupdate", updateDuration);
+audio.addEventListener("ended", nextSong);
+audio.addEventListener("loadedmetadata", updateDuration);
+</script>
+</body>
+</html>
